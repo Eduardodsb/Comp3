@@ -57,14 +57,13 @@ Por último, crie o operador '<<' para imprimir. "
 
 Exemplo:
 
-Entrada: [1, 2, 3, 4] vector<int>
-F = int sqr( int a ) { return a*a; }
+Entrada: [1, 2, 3, 4] vector<int> <br>
+F = int sqr( int a ) { return a*a; } <br>
 Saida: [ 1, 4, 9, 16 ] vector<int>
 
 Se a função F for algo do tipo 
 
-string romanos( int n ) { // blablaba }
-
+string romanos( int n ) { // blablaba } <br>
 a saída será vector<string> => [ "I", "IV", "IX", "XVI" ]
 
 Exemplo de uso:
@@ -86,12 +85,12 @@ vector<double> s = apply( v, sin );"
 
 "Implementar uma template que torne possível o seguinte tipo de código:
 
-int tab[10] =  { 1, 2, 3, 2, 3, 4, 6, 0, 1, 8 };
-vector<int> v{ 2 , 6, 8 };
-tab | []( int x ) { cout << x*x << endl; };
-tab | [ &v ]( int x ) { v.push_back( x ); };
-v | []( int x ) { cout << x*x << endl; };
-v | &print;
+int tab[10] =  { 1, 2, 3, 2, 3, 4, 6, 0, 1, 8 }; <br>
+vector<int> v{ 2 , 6, 8 }; <br>
+tab | []( int x ) { cout << x*x << endl; }; <br>
+tab | [ &v ]( int x ) { v.push_back( x ); }; <br>
+v | []( int x ) { cout << x*x << endl; }; <br>
+v | &print; <br>
 
 onde print é uma função que recebe um int. 
 
