@@ -68,10 +68,10 @@ a saída será vector<string> => [ "I", "IV", "IX", "XVI" ]
 
 Exemplo de uso:
 
-vector<int> v;
-v.push_back( 1 );
-v.push_back( 3 );
-v.push_back( 5 );
+vector<int> v; <br>
+v.push_back( 1 ); <br>
+v.push_back( 3 ); <br> 
+v.push_back( 5 ); <br>
 vector<double> s = apply( v, sin );"
 
 
