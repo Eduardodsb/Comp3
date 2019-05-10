@@ -1,6 +1,6 @@
 # Computação 3 - C++
 
-Trabalhos realizados na disciplina de Computação 3. Tal disciplina tem como foco a aprendizagem de c++.
+Trabalhos realizados na disciplina de Computação 3. Tal disciplina tem como foco a aprendizagem de c++ e a mesma é lecionada pelo professor Geraldo Zimbrão.
 
 ## Requisítos necessários:
 
@@ -148,7 +148,7 @@ Gere um erro de compilação se "->*" for usado com um double: x->*0.5, por exem
 
 ### Enunciado
 
-Derivador Simbólico - Parte 2
+"Derivador Simbólico - Parte 2
 
 Usando a solução da tarefa Derivador Simbólico, e efetuando as devidas correções e alterações, acrescente no derivador simbólico dois métodos: str e dx_str, com o cabeçalho abaixo:
 
@@ -157,4 +157,4 @@ string dx_str() const;
 
 Esse métodos devem retornar a representação em string da função e de sua derivada. Não deve ser feita nenhuma simplificação, ou seja, saídas como (0 * x + 1 * 1) são aceitáveis e devem ser mantidas.
 
-Na saída substitua o operador "->*" por "^".
+Na saída substitua o operador "->*" por "^"."
