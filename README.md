@@ -12,6 +12,11 @@ Trabalhos realizados na disciplina de Computação 3. Tal disciplina tem como fo
    $ sudo apt-get update<br>
    $ sudo apt-get install g++
 
+* Compilar e rodar
+
+   g++ -o arquivo arquivo.cc -ansi -Wall --std=c++17 <br>
+   ./arquivo
+
 ## - Trabalho 1
 
 * classe
