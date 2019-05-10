@@ -133,3 +133,23 @@ x->*2 ==> x²
 
 Gere um erro de compilação se "->*" for usado com um double: x->*0.5, por exemplo. A mensagem do erro deve ser: "Operador de potenciação definido apenas para inteiros".
 "
+
+## - Trabalho 5
+* Derivador Simbólico
+* static_assert
+* is_same 
+* Template
+
+
+### Enunciado
+
+Derivador Simbólico - Parte 2
+
+Usando a solução da tarefa Derivador Simbólico, e efetuando as devidas correções e alterações, acrescente no derivador simbólico dois métodos: str e dx_str, com o cabeçalho abaixo:
+
+string str() const;
+string dx_str() const;
+
+Esse métodos devem retornar a representação em string da função e de sua derivada. Não deve ser feita nenhuma simplificação, ou seja, saídas como (0 * x + 1 * 1) são aceitáveis e devem ser mantidas.
+
+Na saída substitua o operador "->*" por "^".
