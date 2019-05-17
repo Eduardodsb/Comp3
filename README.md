@@ -158,3 +158,33 @@ string dx_str() const;
 Esse métodos devem retornar a representação em string da função e de sua derivada. Não deve ser feita nenhuma simplificação, ou seja, saídas como (0 * x + 1 * 1) são aceitáveis e devem ser mantidas.
 
 Na saída substitua o operador "->*" por "^"."
+
+## - Trabalho 6
+* Filter
+* is_same 
+* Template
+
+### Enunciado
+"Acrescentar na tarefa anterior o conceito de filter. Um filter é um predicado que retorna bool, e somente repassa para o próximo "pipe" os elementos que retornarem verdadeiro.
+
+Usando o exempla tarefa Stream:
+
+v | []( int x ) { return x % 2 == 0; } | [] ( int x ) { cout << x << endl; };
+
+Irá imprimir apenas os números pares."
+
+## - Trabalho 7
+* Derivador Simbólico
+* static_assert
+* is_same 
+* Template
+
+### Enunciado
+"Usando o Derivador construído na parte 2, remova todos os parênteses desnecessários, e removendo multiplicação por 1, 0, adição com 0 e potenciação a 0 e 1.
+Exemplos:
+
+Entrada: (x+3)->*2
+Saída: f(x) = (x+3)^2, f'(x) = 2*(x+3) 
+
+Entrada: (x)->*3
+Saída: f(x) = x^3, f'(x) = 3*x^2 "
