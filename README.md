@@ -105,12 +105,12 @@ Esse operador será equivalente a:
 
 for_each( tab, tab+10,  []( int x ) { cout << x*x << endl; } );"
 
+
 ## - Trabalho 4
 * Derivador Simbólico
 * static_assert
 * is_same 
 * Template
-
 
 ### Enunciado
 
@@ -139,12 +139,12 @@ x->*2 ==> x²
 Gere um erro de compilação se "->*" for usado com um double: x->*0.5, por exemplo. A mensagem do erro deve ser: "Operador de potenciação definido apenas para inteiros".
 "
 
+
 ## - Trabalho 5
 * Derivador Simbólico
 * static_assert
 * is_same 
 * Template
-
 
 ### Enunciado
 
@@ -159,6 +159,7 @@ Esse métodos devem retornar a representação em string da função e de sua de
 
 Na saída substitua o operador "->*" por "^"."
 
+
 ## - Trabalho 6
 * Filter
 * is_same 
@@ -172,6 +173,7 @@ Usando o exempla tarefa Stream:
 v | []( int x ) { return x % 2 == 0; } | [] ( int x ) { cout << x << endl; };
 
 Irá imprimir apenas os números pares."
+
 
 ## - Trabalho 7
 * Derivador Simbólico
@@ -188,3 +190,24 @@ Saída: f(x) = (x+3)^2, f'(x) = 2*(x+3)
 
 Entrada: (x)->*3
 Saída: f(x) = x^3, f'(x) = 3*x^2 "
+
+
+## - Trabalho 8
+* Expressões Lambda
+* invoke
+* invoke_result
+* is_same 
+* Template
+
+### Enunciado
+Expressões Lambda Simplificadas
+
+Tente fazer expressões lambda que permitam o programa abaixo compilar (e executar corretamente):
+
+X x; // Declarar em algum lugar global.<br>
+int tab[10] =  { 1, 2, 3, 2, 3, 4, 6, 0, 1, 8 };.<br>
+vector<int> v;.<br>
+tab | cout << x*x << '\n';.<br>
+tab | [ &v ]( int x ) { v.push_back( x ); };.<br>
+v | x % 2 == 0 | cout << x*x + 1 << '\n';.<br>
+v | x % 2 == 1 | x*x | cout << x << '\n';.<br>
