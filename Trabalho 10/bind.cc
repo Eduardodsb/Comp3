@@ -1,0 +1,172 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include <map>
+#include <algorithm>
+#include <type_traits>
+#include <functional>
+#include <array>
+
+
+using namespace std;
+
+
+template<typename Functor, typename FunctorOriginal, typename... Param >
+class Bind {
+public:
+Functor f;
+FunctorOriginal fo;
+  Bind(Functor f, FunctorOriginal fo, Param ...pa): f(f), fo(fo){}
+
+template<typename... NParam >
+  auto operator() (NParam... p) { 
+    if constexpr (std::is_invocable_v<decltype(fo), Param... ,NParam... >){
+        return std::invoke(f, p...);
+    }else{
+      return [this, p...] (auto ...resto) { return std::invoke(f, p..., resto...);};
+      
+    }
+
+  } 
+private:
+};
+
+
+template<typename T1, typename T2, typename... Param>
+auto bind(Bind<T1,T2> f, Param... p){
+    auto lamb = [f, p...] (auto ...resto) { return std::invoke(f.f, p..., resto...);};
+    Bind x{lamb, f.f, p...};
+    return x;
+}
+
+template<typename Functor, typename... Param>
+auto bind(Functor f, Param... p){
+    if constexpr(std::is_class<Functor>::value){
+        auto lamb = [&f, p...] (auto ...resto) {return std::invoke(f, p..., resto...);};
+        Bind x{lamb, f, p...};
+        return x;
+    }else{
+        auto lamb = [f, p...] (auto ...resto) {return std::invoke(f, p..., resto...);};
+        Bind x{lamb, f, p...};
+        return x;
+    }
+}
+
+//________________________________________Funções de Teste_________________________________________
+
+long mdc( long a, long b ) { return b == 0 ? a : mdc( b, a%b ); }
+
+struct MMC {
+  auto operator()( long a, long b ) { return a*b/mdc(a,b); }    
+};
+
+struct BarraPesada {
+  template <typename A, typename B>
+  auto operator()( A a, B b ) {
+      return a + b;
+  } 
+};
+
+string ordena( string a, string b, string c, string d, string e, string f, string g, string h, string i, string j, string k, string l ) {
+  std::array<string, 12> tab = { a, b, c, d, e, f, g, h, i, j, k, l };
+  string result;
+  
+  std::sort( tab.begin(), tab.end() );
+  for( auto itr = tab.begin(); itr != tab.end(); ++itr )
+    result += *itr + " ";
+  
+  return result;    
+}
+
+int main() {
+using ::bind;
+ //TESTES
+
+//1 ok
+/*  
+auto f1 = bind( mdc, 12 );
+for( int i = 2; i <= 12; i++ )
+  cout << f1( i ) <<  " ";
+*/
+
+//2 ok
+/*   
+    auto f2 = bind( mdc );
+    auto f1 = bind( f2, 12 );
+    for( int i = 2; i <= 12; i++ )
+    cout << f1( i ) <<  " ";
+*/
+
+//3ok
+ /*     
+auto f2 = bind( mdc );
+auto f1 = f2( 18 );
+for( int i = 2; i <= 18; i++ )
+    cout << f1( i ) <<  " ";
+*/
+
+//4 ok
+ /*  
+auto f2 = bind( []( int x, int y, int z ){ cout << x*y << (char) z << " " ; }, 10 );
+for( int i = 0; i < 5; i++ )
+  f2( i, ',' );
+*/
+
+//5ok
+/*   
+auto f3 = bind( []( int x, int y, int z ){ cout << x*z << (char) y << " " ; } );
+auto f1 = f3( 5, ';' );
+for( int i = 0; i < 5; i++ )
+  f1( i );
+*/
+
+//6 ok
+/*   
+MMC mmc;
+auto f1 = bind( mmc, 6 );
+for( int i = 2; i <= 12; i++ )
+  cout << f1( i ) << " ";
+*/
+
+//7 ok
+/* 
+MMC mmc; 
+auto f2 = bind( mmc );
+auto f1 = f2( 6 );
+for( int i = 2; i <= 12; i++ )
+  cout << f1( i ) << " "; 
+*/
+
+//8 ok 
+ /*  
+auto f1 = ::bind( ordena, "a", "b", "9", "6", "s", "2", "1", "0", "c", "d", "e" );
+cout << f1( "@" ) << endl;
+cout << f1( "~" );
+*/
+
+//9 ok
+/*  
+auto f2=bind( BarraPesada() );
+cout << f2( (string) "a", (string) "b" ) << endl;
+cout << f2( 3.1, 4.3 );
+*/
+
+//10 ok
+/*   
+BarraPesada barraMaisPesada;
+auto f2=bind( barraMaisPesada );
+auto f1s=f2( (string) "Hello, " );
+auto f1f=f2( 3.14 );
+cout << f1s( "world!" ) << endl;
+cout << f1f( 4.3 );
+*/
+
+//11 ok
+ /* 
+string msg = "uma frase";
+auto prefixo = ::bind( &string::substr, msg, 0 );
+for( int i = 0; i < 5; i++ )
+  cout << prefixo( i + 1 ) << endl;
+*/
+    return 0;
+}
