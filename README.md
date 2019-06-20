@@ -211,3 +211,20 @@ tab | cout << x*x << '\n';.<br>
 tab | [ &v ]( int x ) { v.push_back( x ); };.<br>
 v | x % 2 == 0 | cout << x*x + 1 << '\n';.<br>
 v | x % 2 == 1 | x*x | cout << x << '\n';.<br>
+
+
+## - Trabalho 9
+* Expressões Lambda
+* invoke
+* invoke_result
+* is_same 
+* Template
+
+### Enunciado
+Usando as Expressões Lambda Simplificadas da tarefa anterior, faça com que o código abaixo rode também:
+
+vector m< vector<int> >;
+m | x[0] != 0 | ( x | cout << x << '\n' );
+   
+Nesse caso m é um vetor de vetores, e então o primeiro x é um vetor. Logo, podemos escrever um pipe para ele.
+E será necessário redefinir o operador "[]" para Expressões Lambda.
