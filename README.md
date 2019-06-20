@@ -228,3 +228,50 @@ m | x[0] != 0 | ( x | cout << x << '\n' );
    
 Nesse caso m é um vetor de vetores, e então o primeiro x é um vetor. Logo, podemos escrever um pipe para ele.
 E será necessário redefinir o operador "[]" para Expressões Lambda.
+
+
+## - Trabalho 10
+* Bind
+* invoke
+* invoke_result
+* is_same 
+* is_class
+* is_invocable
+
+### Enunciado
+Classe Bind e função bind
+
+Classe Bind 
+
+Nesse trabalho você deve criar uma classe template Bind que recebe um functor/função e armazena esse functor, juntamente com possíveis parâmetros. Cada vez que uma função é ligada (binded) a um parâmetro, ela perde em n-aridade (ou seja, diminui o seu número de parâmetros). Ex: se uma função de dois parâmetros é ligada a um parâmetro, ela se torna uma nova função de apenas um parâmetro (o outro deve ser armazenado).
+
+int mdc( int a, int b ) { return b == 0 ? a : mdc( b, a%b ); }<br>
+auto f = bind( mdc, 12 ); <br>
+// f é uma função de um parâmetro que calcula o mdc entre 12 e o parâmetro passado.  <br>
+cout << f( 9 ) << endl; // deve imprimir 3, que é o mdc entre 12 e 9.<br>
+
+Outros exemplos de uso:<br>
+
+void func4( int a, string b, int c, double d ) {
+  // Faz algum processamento
+}<br>
+
+
+int main() {
+  auto f3 = bind( func4, 5 );
+
+  cout << f3( "b", 7, 2.1 ) << endl;
+ 
+  auto f2 = bind( f3, "b" );
+  auto f2_a = f3( "b" );
+  auto f2_b = f3( "b" );
+  auto f1 = f3( "b", 8 );
+
+  cout << f1( 1.1 ) << endl; 
+  cout << f2( 2, 1.1 ) << endl; 
+  cout << f2_a( 2, 1.1 ) << endl; 
+  cout << f2_b( 2, 1.1 ) << endl; 
+}
+
+Note que devemos declarar uma função auxiliar bind, embora poderia ser possível usar a sintaxe Bind{ func4, 1, "a" };
+
