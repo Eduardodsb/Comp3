@@ -233,7 +233,7 @@ E será necessário redefinir o operador "[]" para Expressões Lambda.
 ## - Trabalho 10
 * Bind
 * invoke
-* invoke_result
+* Variadic templates
 * is_same 
 * is_class
 * is_invocable
@@ -275,3 +275,61 @@ int main() {
 
 Note que devemos declarar uma função auxiliar bind, embora poderia ser possível usar a sintaxe Bind{ func4, 1, "a" };
 
+
+## - Trabalho 11
+* invoke
+* invoke_result
+* is_same 
+
+### Enunciado
+Otimizador de Expressões
+
+Um otimizador de expressões para Matrizes é um conjunto de classes e operadores que, dada uma expressão de matrizes envolvendo "+" e "*" (por exemplo, A*B + C) escolhe a ordem de execução com menor número de operações de soma e multiplicação (e que por isso deve ter a execução mais rápida). Por exemplo, (A*B)*C pode ser bem mais lento do que A*(B*C), embora o resultado seja idêntico (basta que A seja uma matriz-coluna, B uma matriz-linha e C uma matriz quadrada).
+
+Nessa tarefa você deve construir um tipo template Matriz<L,C> para double e os respectivos operadores de multiplicação e adição de matrizes, bem como uma operação para aplicar uma função à uma matriz.
+
+Exemplo de declarações válidas:
+
+innt main() {
+  Matriz<10,20> a;
+  Matriz<20,3> b;
+  auto c = a*b;
+  
+// aplicar uma função à uma matriz:
+  
+  auto f = Apply( []( double x ){ return rand(); } );
+  
+  c = f(c);
+  /* Vai calcular c[i][j] = g( c[i][j] ); */
+  auto d = f(a) * b;
+  
+  for( int i = 0; i < d.nLin(); i++ )
+    for( int j = 0; j < d.nCol(); j++ )
+      cout << d[i][j] << endl;
+  
+  return 0;  
+}
+
+## - Trabalho 12
+* invoke
+* invoke_result
+* is_same 
+
+### Enunciado
+Bind posicional
+
+Altere a função bind da tarefa anterior de modo a permitir que os parâmetros sejam passados de forma posicional, tornando possível dar bind em um parâmetro do meio:
+
+auto f = bind( foo, __, __, 34 ); // guardou 34 para o terceiro parâmetro de foo
+auto g = f( __, 56 ); // colocou 56 como segundo parâmetro de f, ou seja, equivale a bind( foo, __, 56, 34 )
+cout << g( 9 ) << endl; // chamou foo( 9, 56, 34 )
+
+Crie uma classe PlaceHolder e declare uma variável global "PlaceHolder __;" A princípio essa classe é vazia, mas se você achar conveniente pode declarar membros ou métodos.
+
+Note que é necessário tratar quando se marca lugar para os parâmetros do fim:
+
+auto f = bind( foo, 89, __, __ );  // É o mesmo que bind( foo, 89 )
+
+Ou seja, "__" como último parâmetros devem ser ignorados.
+
+OBS: uma sugestão para a solução é usar tuple, e ir substituind PlaceHolder dentro da tupla pelos parâmetros fornecidos.
